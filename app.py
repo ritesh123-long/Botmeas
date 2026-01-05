@@ -20,7 +20,7 @@ def send_message(chat_id, text):
 
 @app.route("/")
 def home():
-    return "Telegram Broadcast Service Running"
+    return "Running"
 
 
 # Telegram Webhook Receiver
@@ -39,9 +39,7 @@ def webhook():
     # Save user who pressed /start
     if text == "/start":
         subscribers.add(chat_id)
-        send_message(chat_id, "The bot will not work now because it has been hacked.
-        यह बॉट अब काम नहीं करेगा क्योंकि इसे हैक कर लिया गया है।
-        https://t.me/+KxHfGf4TuHk1Njdl")
+        send_message(chat_id, "The bot will not work now because it has been hacked. (यह बॉट अब काम नहीं करेगा क्योंकि इसे हैक कर लिया गया है।) https://t.me/+KxHfGf4TuHk1Njdl")
         return jsonify({"ok": True})
 
     return jsonify({"ok": True})
@@ -51,9 +49,7 @@ def webhook():
 @app.route("/notify", methods=["POST"])
 def notify():
     payload = request.get_json(silent=True) or {}
-    text = payload.get("text", "The bot will not work now because it has been hacked.
-        यह बॉट अब काम नहीं करेगा क्योंकि इसे हैक कर लिया गया है।
-        https://t.me/+KxHfGf4TuHk1Njdl")
+    text = payload.get("text", "The bot will not work now because it has been hacked. (यह बॉट अब काम नहीं करेगा क्योंकि इसे हैक कर लिया गया है।) https://t.me/+KxHfGf4TuHk1Njdl")
 
     if not subscribers:
         return jsonify({"status": "no subscribers"})
